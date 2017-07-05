@@ -1,0 +1,52 @@
+<title>SKRIPSI SELESAI</title>
+<script src="https://unpkg.com/vue"></script>
+<script src="https://cdn.jsdelivr.net/vue.resource/1.3.1/vue-resource.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<div id="app">
+    <input type="text" v-model="username" name="username"/>
+    <input type="text" v-model="password" name="password"/>
+<button v-on:click="login(username,password)">add</button></br>
+<button>remove</button>
+</br>
+<textarea></textarea>
+<table>
+    <thead>
+        <th>_id</th>
+        <th>pertanyaan</th>
+        <th>jawaban</th>
+    </thead>
+    <tr v-for="panda in ecommerce">
+        <td>{{panda._id}}</td>
+        <td>{{panda.pertanyaan}}</td>
+        <td>{{panda.jawaban}}</td>
+    </tr>
+</table>
+
+</div>
+<script>
+
+var app = new Vue({
+  el: '#app',
+  data: {
+      username:null,
+      password:null,
+    ecommerce: [],
+  },
+  mounted:function(){
+this.$http.get('/ecommerce').then(data=>{
+  this.ecommerce=JSON.parse(data.bodyText)
+  
+  }
+, err=>{
+  console.log(err)
+})    
+  },
+  methods:{
+login:function(a,b){
+    alert(a+b);
+}
+  },
+  
+})
+
+</script>

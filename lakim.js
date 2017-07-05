@@ -1,49 +1,56 @@
 var express = require('express')
 var app = express()
-app.use(express.static('public'))
+app.use(express.static('cam'))
 var axios=require('axios')
 var crypto = require('crypto')
 //untuk menjadikan json
+// var fs = require("fs")
+// var browserify = require('browserify')
+// var vueify = require('vueify')
+
+// browserify('cam/main.js')
+//   .transform(vueify)
+//   .bundle()
+//   .pipe(fs.createWriteStream("bundle.js"))
 var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
 var koneksi=require('./koneksi')
 app.get('/goal', function (req, res) {
-  res.sendFile(__dirname+'/panda.html')
+  res.sendFile(__dirname+'/html/penasaran.html')
+})
+app.set('view engine','ejs')
+app.post("/webhook",jsonParser,function(req,res){
+  console.log(JSON.stringify(req.body))
+  res.status(200).send("panda");
+})
+app.get('/webhook', function(req, res) {
+  if (req.query['hub.mode'] === 'subscribe' &&
+      req.query['hub.verify_token'] === "berhasil") {
+    console.log("Validating webhook");
+    res.status(200).send(req.query['hub.challenge']);
+  } else {
+    console.error("Failed validation. Make sure the validation tokens match.");
+    res.sendStatus(403);          
+  }  
+});
+app.get('/', function (req, res) {
+  res.sendFile(__dirname+"/cam/pages/blank.html")
+  // res.sendFile(__dirname+"/cam/pages/index.html")
 })
 
-app.get('/', function (req, res) {
-  res.sendFile(__dirname+'/penasaran.html')
-})
+
 app.get('/skripsi', function (req, res) {
-  res.sendFile(__dirname+'/panda.html')
+  res.sendFile(__dirname+'/html/panda.html')
 })
-app.get('/codenvy',function(req,res){
-  koneksi.cari('codenvy',{},function(data){
-    res.send(data)
-  })
-})
+//mendapatkan pertanyaan ecommerce
 app.get('/ecommerce',function(req,res){
   koneksi.cari('pertanyaanecommerce',{},function(data){
     res.send(data)
   })
 })
 
-//webhook mendapatkan notifikasi facebook
-var menggunakan=require("./perang")
-app.post('/facebook', jsonParser, function (req, res) {
-  res.send("berhasil").status(200)
-  console.log("berhasil")
-  var cheerio = require('cheerio')
-  var $ = cheerio.load(req.body.HtmlBody)
-  if($('a').eq(0).attr('href')!="https://codenvy.io/dashboard"){
-  koneksi.cari("codenvy",{},data=>{
-    console.log($('a').eq(0).attr('href'))
-  menggunakan.masukPertamaCodenvy($('a').eq(0).attr('href'),data[data.length-1].username)
-  })
-}
 
-})
 
-app.listen(process.env.PORT, function () {
+app.listen(process.env.PORT,process.env.IP, function () {
   console.log('Example app listening on port '+process.env.PORT)
 })
