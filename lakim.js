@@ -3,22 +3,13 @@ var app = express()
 app.use(express.static('cam'))
 var axios=require('axios')
 var crypto = require('crypto')
-//untuk menjadikan json
-// var fs = require("fs")
-// var browserify = require('browserify')
-// var vueify = require('vueify')
-
-// browserify('cam/main.js')
-//   .transform(vueify)
-//   .bundle()
-//   .pipe(fs.createWriteStream("bundle.js"))
 var bodyParser = require('body-parser')
 var jsonParser = bodyParser.json()
 var koneksi=require('./koneksi')
 app.get('/goal', function (req, res) {
   res.sendFile(__dirname+'/html/penasaran.html')
 })
-app.set('view engine','ejs')
+
 app.post("/webhook",jsonParser,function(req,res){
   console.log(JSON.stringify(req.body))
   res.status(200).send("panda");
