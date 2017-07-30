@@ -1,0 +1,42 @@
+
+                    
+                        
+                            <div class="row">
+                                <div class="col-sm-4">
+                                <h2>IDF</h2>    
+                                </div>
+                                
+                    <div class="col-sm-4 pull-right ">
+                       
+                        <label> search:</label><input class="form-control" ng-model="lokis" placeholder="Enter text">
+                        </div>
+                    </div>
+                     
+                    {{knowledge.length}}
+                    <br>
+                    <center><md-progress-circular ng-show="isLoading" style="padding-bottom:10px" mode="indeterminate"></md-progress-circular></center>                            
+                        <div ng-show="isLoading" style="margin-bottom:80px"></div>
+                            <div ng-hide="isLoading" class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>_id</th>
+                                                    <th>kata</th>
+                                                    <th>idf</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr pagination-id="idf" dir-paginate="(key,value) in knowledge  |filter:lokis | itemsPerPage: 3">
+                                                     <td>{{value._id}}</td>
+                                                     <td>{{value.kata}}</td>
+                                                     <td>{{value.idf}}</td>
+                                                    
+                                                    
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                <dir-pagination-controls pagination-id="idf" boundary-links="true" direction-links="true" max-size="5"></dir-pagination-controls>
+                      

@@ -1,4 +1,5 @@
-var url = 'mongodb://panda:1234@ds135800.mlab.com:35800/panda';
+// var url = 'mongodb://panda:1234@ds135800.mlab.com:35800/panda';
+var url = 'mongodb://ec2-52-15-181-63.us-east-2.compute.amazonaws.com:27017/panda';
 var collections = []
 var mongojs=require("mongojs")
 var pencarian=function(nama,koleksi,fungsi){
@@ -16,15 +17,16 @@ db.close()
 }
 
 
-var simpan=function(nama,koleksi){
+var simpan=function(nama,koleksi,data){
  var db = mongojs(url,collections);
  db.collection(nama).save(koleksi, function(err, saved) {
   if( err || !saved ){ 
   console.log("User not saved");
-  db.close()
+    db.close()
   }
   else{ 
   console.log("User saved");
+  data("hai")
   db.close()
 }
 
@@ -39,18 +41,18 @@ var updateId=function(nama,kondisi,berubah){
 db.close()
 })
 }
-var update=function(nama,kondisi,berubah){
+var update=function(nama,kondisi,berubah,sudah){
 var db = mongojs(url,collections);
   db.collection(nama).update({_id:db.ObjectId(kondisi)}, {$set: berubah}, {multi: true}, function (data) {
-    console.log("saved")
+    sudah("saved")
 db.close()
 })
 }
-var hapus=function(nama,kondisi){
+var hapus=function(nama,kondisi,kevlar){
   var db = mongojs(url,collections);
 db.collection(nama).remove({_id:db.ObjectId(kondisi)}, {}, function(data,panda){
   if(!data){
-    console.log("sukses menghapus")
+    kevlar("sukses menghapus")
     db.close()
   }else{
     console.log("error: "+panda)

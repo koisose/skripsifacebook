@@ -1,0 +1,41 @@
+<!--./row-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Generator
+                    
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                         <h2>GENERATOR</h2>
+                         <div ng-hide="isLoading" class="table-responsive" >
+                                        <table    class="table table-bordered table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>id</th>
+                                                    <th>pertanyaan</th>
+                                                    <th>jawaban</th>
+                                                    <th>cosine</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr   dir-paginate="panda in knowledge | itemsPerPage:5" pagination-id="cosine" >
+                                                    <td>{{panda.id}}</td>
+                                                    <td>{{panda.pertanyaan}}</td>
+                                                    <td>{{panda.jawaban}}</td>
+                                                    <td>{{panda.cosine}}</td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                               
+                                    </div>
+                                    <dir-pagination-controls boundary-links="true" pagination-id="cosine" direction-links="true" max-size="5"></dir-pagination-controls>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>

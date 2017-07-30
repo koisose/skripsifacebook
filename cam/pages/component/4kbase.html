@@ -1,0 +1,122 @@
+<div class="row">
+    <div class="col-sm-12">
+               <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Knowledge Base
+                            <div class="pull-right">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default btn-xs " data-toggle="modal" data-target="#cam" >
+                                        Tambah Pertanyaan
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </button>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.panel-heading -->
+                    
+                        <div class="panel-body">
+                            <div class="row">
+                    <div class="col-sm-4 pull-right">
+                        <label> search:</label><input class="form-control" ng-model="searchText" placeholder="Enter text">
+                        </div>
+                    </div>
+                    <br>
+                    <center><md-progress-circular ng-show="isLoading" style="padding-bottom:10px" mode="indeterminate"></md-progress-circular></center>                            
+                        <div ng-show="isLoading" style="margin-bottom:80px"></div>
+                            <div ng-hide="isLoading" class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th ng-repeat="(key, value) in knowledge[0]">{{key}}</th>
+                                                    <th>action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr dir-paginate="panda in knowledge  | filter:searchText | itemsPerPage: 5" pagination-id="paramore">
+                                                    <td>{{panda._id}}</td>
+                                                    <td>{{panda.pertanyaan}}</td>
+                                                    <td>{{panda.jawaban}}</td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-success" data-toggle="modal" ng-click="editModal(value._id,value.pertanyaan,value.jawaban)" data-target="#edit">Edit</button>
+                                                        <button type="button" class="btn btn-danger" ng-click="delete(value._id,$event)">Delete</button></td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                <dir-pagination-controls boundary-links="true" direction-links="true" max-size="5" pagination-id="paramore"></dir-pagination-controls>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                <!--panel    -->
+     <modaltambah></modaltambah>
+     <modaledit></modaledit>
+<!--modal-->
+</div>
+<!--col-sm-12-->
+</div>
+<!--row-->
+<!--modal edit-->
+<div id="edit" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+          
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Pertanyaan dan Jawaban</h4>
+      </div>
+      <div class="modal-body">
+          <form my-enter="edit(id,pertanyaan1,jawaban1)">
+        <div class="form-group">
+            <label>ID</label>
+<input class="form-control"   ng-model="id" disabled placeholder="pertanyaan">
+            <label>Pertanyaan</label>
+            
+    <input class="form-control"   ng-model="pertanyaan1" placeholder="pertanyaan">
+    </div>
+    <div class="form-group">
+    <label>Jawaban</label>
+      <input class="form-control" ng-model="jawaban1"  placeholder="jawaban">
+    </div>
+    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="edit(id,pertanyaan1,jawaban1)" data-dismiss="modal">Edit</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!--modal tambah-->
+              <div id="cam" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+          
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Tambah Pertanyaan dan Jawaban</h4>
+      </div>
+      <div class="modal-body">
+          <form my-enter="tambah(pertanyaan,jawaban,$event)">
+        <div class="form-group">
+            <label>Pertanyaan</label>
+    <input class="form-control"  ng-model="pertanyaan" placeholder="pertanyaan">
+    </div>
+    <div class="form-group">
+    <label>Jawaban</label>
+      <input class="form-control" ng-model="jawaban"  placeholder="jawaban">
+    </div>
+    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" ng-click="tambah(pertanyaan,jawaban,$event)" data-dismiss="modal">Tambah</button>
+      </div>
+    </div>
+
+  </div>
+</div>

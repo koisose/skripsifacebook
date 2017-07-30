@@ -1,0 +1,34 @@
+<div class="row">
+                                <div class="col-sm-4">
+                                <h2>TF*IDF QUERY</h2>    
+                                </div>
+                                
+                    <div class="col-sm-4 pull-right ">
+                       
+                        <!--<label> search:</label><input class="form-control" ng-model="normal" placeholder="Enter text">-->
+                        </div>
+                    </div>
+                    <br>
+                    <center><md-progress-circular ng-show="isLoading" style="padding-bottom:10px" mode="indeterminate"></md-progress-circular></center>                            
+                        <div ng-show="isLoading" style="margin-bottom:80px"></div>
+                            <div ng-hide="isLoading" class="table-responsive" >
+                                        <table pagination-id="normal"   class="table table-bordered table-hover table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>kata</th>
+                                                    <th>TFIDF</th>
+                                                    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr   ng-repeat="panda in tfidf2" >
+                                                    <td>{{panda.kata}}</td>
+                                                    <td>{{panda.tfidf}}</td>    
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                               
+                                    </div>
+                                    <!--<dir-pagination-controls boundary-links="true" pagination-id="normal" direction-links="true" max-size="3"></dir-pagination-controls>-->
+                      

@@ -1,0 +1,46 @@
+<!--./row-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Parser
+                    
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body" style="word-break:break-all;">
+                    <div>Masukkan Pertanyaan</div>
+                            <div class="form-group">
+                                            <label>Text area</label>
+                                            <textarea my-enter="tokenizer(parser)" ng-model="parser" class="form-control" rows="3"></textarea>
+                        </div>
+                        <button class="btn btn-success" ng-click="tokenizer(parser)">Parser</button>
+                        <button class="btn btn-danger" ng-click="clear()">Clear</button>
+                     <center><h3>{{token}}</h3></center>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!--./row-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="fa fa-bar-chart-o fa-fw"></i> Lexicon
+                    
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body" style="word-break:break-all;">
+                        <h2>LEXICON</h2><br>
+                        <h2>Pembetulan Kata</h2><br>
+                     <center><h3>   {{lexicon.lavenshtein}}</h3></center><br>
+                            <h2>Pengubah Menjadi Kata Dasar</h2><br>                    
+                     <center><h3>   {{lexicon.stem}}</h3></center> 
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+               
